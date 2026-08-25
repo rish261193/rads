@@ -528,12 +528,12 @@ button {
   white-space: nowrap;
 }
 .button-safe-zone .btn-yes {
-  left: 8%;
+  left: 26%;
   top: 50%;
   transform: translateY(-50%) scale(var(--yes-scale, 1));
 }
 .button-safe-zone .btn-no {
-  left: 62%;
+  left: 58%;
   top: 50%;
   transform: translateY(-50%) scale(var(--no-scale, 1));
 }
@@ -912,6 +912,128 @@ button {
 }
 .note-body p { margin: 0 0 10px; }
 .note-sign { text-align: right; font-weight: 800; color: var(--pink-primary-dark); margin-top: 14px; }
+
+/* =========================================================
+   STAGE 1 HERO REDESIGN
+   Everything below is scoped to Stage 1 only (new classes, or
+   selectors anchored to #stage-1 / #dogZone1 / #dog1 / etc.)
+   so Stages 2-5 are left completely untouched.
+   ========================================================= */
+
+/* Denser composition: less empty space between blocks. */
+#stage-1.stage { padding-bottom: 18px; }
+#stage-1 .stage-inner {
+  gap: 8px;
+  justify-content: flex-start;
+}
+
+/* --- extra clouds (reuse .scene-cloud, new positions only) --- */
+.cloud-d { top: 27%; left: -40%; animation-duration: 40s; animation-delay: -14s; transform: scale(0.5); }
+.cloud-e { top: 3%; left: -110%; animation-duration: 30s; animation-delay: -4s; transform: scale(0.8); }
+
+/* --- pixel flower bed along the hill --- */
+.flower-bed {
+  position: absolute;
+  left: 4%;
+  right: 4%;
+  bottom: 9%;
+  height: 10%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+.pixel-flower {
+  font-size: 1rem;
+  line-height: 1;
+  filter: drop-shadow(0 1px 0 var(--outline-soft));
+  animation: flowerSway 3.6s ease-in-out infinite;
+}
+.pixel-flower.pf-sm { font-size: 0.72rem; transform: translateY(4px); }
+.pixel-flower.pf-pink { color: #ff6f9c; }
+.pixel-flower.pf-yellow { color: var(--gold); }
+.pixel-flower.pf-white { color: #fff6fb; }
+.pixel-flower:nth-child(2n) { animation-delay: 0.6s; }
+.pixel-flower:nth-child(3n) { animation-delay: 1.2s; }
+@keyframes flowerSway {
+  0%, 100% { transform: rotate(-6deg); }
+  50% { transform: rotate(6deg); }
+}
+.pixel-flower.pf-sm:nth-child(2n) { transform: translateY(4px) rotate(-6deg); }
+
+/* --- extra sparkles / hearts (reuse base .sparkle / .bg-heart) --- */
+.s4 { top: 34%; left: 4%; animation-delay: 1.9s; }
+.s5 { top: 30%; right: 6%; animation-delay: 0.4s; }
+.h5 { left: 40%; top: 14%; animation-delay: 2.1s; font-size: 0.8rem; }
+.h6 { right: 30%; top: 60%; animation-delay: 1s; font-size: 0.65rem; }
+.h7 { left: 12%; top: 62%; animation-delay: 3s; font-size: 0.7rem; }
+
+/* --- headline integrated into the scene, no boxed card --- */
+.hero-heading-block {
+  position: relative;
+  z-index: 5;
+  text-align: center;
+  padding: 6px 6px 0;
+}
+.hero-support-text {
+  display: inline-block;
+  margin-top: 0.55rem;
+  padding: 5px 14px;
+  background: rgba(255, 243, 232, 0.82);
+  border: 2px solid var(--outline);
+  border-radius: 999px;
+  box-shadow: 2px 2px 0 var(--outline);
+  font-size: 0.82rem;
+}
+
+/* --- dog zone: bigger stage, room for the hero puppy --- */
+#dogZone1 {
+  min-height: 168px;
+  align-items: flex-end;
+  gap: 10px;
+}
+#dog1.dog-hero {
+  width: 156px;
+  height: 156px;
+}
+#dog1.dog-hero .dog-body {
+  width: 156px;
+  height: 156px;
+  filter: drop-shadow(0 4px 0 rgba(91, 48, 73, 0.25));
+}
+#dog1.dog-hero .dog-tail {
+  width: 62px;
+  height: 62px;
+  right: -14px;
+  bottom: 26px;
+}
+.dog-ground-shadow {
+  position: absolute;
+  left: 50%;
+  bottom: 4px;
+  width: 96px;
+  height: 18px;
+  background: radial-gradient(ellipse, rgba(91, 48, 73, 0.28) 0%, rgba(91, 48, 73, 0) 72%);
+  transform: translateX(-50%);
+  z-index: 0;
+}
+#dogZone1 #dogBubble {
+  margin-bottom: 90px;
+}
+
+/* --- centered YES / NO pair + taller safe zone for the bigger scene --- */
+#safeZone.button-safe-zone { height: 92px; }
+
+/* --- responsive: keep composition intact at 375 / 390 / 430 --- */
+@media (max-width: 359px) {
+  #dog1.dog-hero, #dog1.dog-hero .dog-body { width: 128px; height: 128px; }
+  #dog1.dog-hero .dog-tail { width: 52px; height: 52px; }
+  #dogZone1 { min-height: 140px; }
+  #dogZone1 #dogBubble { margin-bottom: 74px; }
+}
+@media (min-width: 500px) {
+  #dog1.dog-hero, #dog1.dog-hero .dog-body { width: 176px; height: 176px; }
+  #dog1.dog-hero .dog-tail { width: 70px; height: 70px; }
+}
 
 /* =========================================================
    RESPONSIVE TWEAKS

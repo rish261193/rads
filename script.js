@@ -85,6 +85,100 @@
     return g;
   }
 
+  // ---------------------------------------------------------
+  // STAGE-1 HERO PUPPY — a separate, larger, more detailed
+  // sprite used ONLY for Stage 1's dog. Built the same way as
+  // the shared puppy above (mirrored half-rows) but at higher
+  // resolution with a couple of extra details (eye glint,
+  // blush, a tiny collar charm). Entirely independent data —
+  // does not touch DOG_HALF/PALETTE_MAIN/etc., so every other
+  // stage's dog rendering is unaffected.
+  // ---------------------------------------------------------
+  const DOG1_HALF = [
+    "..........", // 0  spacer
+    ".......ooo", // 1  head top point
+    "......ohhh", // 2  head widening
+    ".....ohhhh", // 3  head widening
+    "....ohhhhh", // 4  head widening
+    "oeeohhhhhh", // 5  ear (outer) + head
+    "oeeohhhhhh", // 6  ear (outer) + head
+    ".oohhhhhhh", // 7  ear taper into cheek
+    "..ohhhhhhh", // 8  cheek
+    "..ohgkkhhh", // 9  EYES row (g = glint, k = pupil, 3px wide)
+    "..obwwwwww", // 10 muzzle / MOUTH row (b = blush)
+    "....ohhhhh", // 11 chin narrows
+    ".....ohhhh", // 12 neck narrows
+    "...ohhhhhh", // 13 shoulders widen
+    "...orrrrrr", // 14 collar
+    "...ohhhhhc", // 15 body (c = tiny collar charm)
+    "...ohhhhhh", // 16 body
+    "...ohhhhhh", // 17 body
+    "..hw..wh..", // 18 paws (center gap intentional)
+    "..........", // 19 spacer
+  ];
+  const ROW_EYES1 = 9;
+  const ROW_EYES1_UPPER = 8;
+  const ROW_MOUTH1 = 10;
+
+  const BASE_GRID1 = buildGrid(DOG1_HALF);
+  const COLS1 = BASE_GRID1[0].length;
+  const CENTER1_L = COLS1 / 2 - 1; // 9
+  const CENTER1_R = COLS1 / 2; // 10
+
+  const EYE1_L = [4, 5, 6];
+  const EYE1_R = [13, 14, 15];
+
+  function gridFor1(expression) {
+    const g = BASE_GRID1.map((row) => row.slice());
+    if (expression === "blink") {
+      EYE1_L.forEach((c) => (g[ROW_EYES1][c] = "o"));
+      EYE1_R.forEach((c) => (g[ROW_EYES1][c] = "o"));
+    } else if (expression === "surprised") {
+      EYE1_L.forEach((c) => (g[ROW_EYES1_UPPER][c] = "k"));
+      EYE1_R.forEach((c) => (g[ROW_EYES1_UPPER][c] = "k"));
+      g[ROW_MOUTH1][CENTER1_L] = "o";
+      g[ROW_MOUTH1][CENTER1_R] = "o";
+    } else if (expression === "sideeye") {
+      EYE1_R.forEach((c) => (g[ROW_EYES1][c] = "o"));
+    } else if (expression === "happy") {
+      EYE1_L.forEach((c) => (g[ROW_EYES1][c] = "o"));
+      EYE1_R.forEach((c) => (g[ROW_EYES1][c] = "o"));
+      g[ROW_MOUTH1][CENTER1_L] = "f";
+      g[ROW_MOUTH1][CENTER1_R] = "f";
+    }
+    return g;
+  }
+
+  const PALETTE_HERO = {
+    o: "#4a2a1c",
+    e: "#e0995c",
+    h: "#f8c988",
+    w: "#fff8ef",
+    k: "#2a1810",
+    g: "#ffffff",
+    b: "#ffb3c6",
+    r: "#ff4d79",
+    c: "#ffd166",
+  };
+
+  function createHeroDog(bodyCanvasId, tailCanvasId) {
+    const bodyCanvas = document.getElementById(bodyCanvasId);
+    const tailCanvas = document.getElementById(tailCanvasId);
+    drawGrid(tailCanvas, buildTailGrid(), TAIL_PALETTE_MAIN);
+    const instance = {
+      bodyCanvas,
+      expression: "idle",
+      locked: false,
+      setExpression(expr) {
+        this.expression = expr;
+        drawGrid(this.bodyCanvas, gridFor1(expr), PALETTE_HERO);
+      },
+    };
+    instance.setExpression("idle");
+    dogRegistry.push(instance);
+    return instance;
+  }
+
   const TAIL_GRID = [
     "...oo...",
     "..oeeo..",
@@ -181,7 +275,9 @@
   }
 
   // Instantiate every dog sprite used across the five stages.
-  const dog1 = createDog("dogCanvas1", "tailCanvas1", "main");
+  // Stage 1 uses the separate, higher-detail hero sprite defined above;
+  // every other stage keeps the original shared sprite untouched.
+  const dog1 = createHeroDog("dogCanvas1", "tailCanvas1");
   createDog("dogCanvas2a", "tailCanvas2a", "partner");
   createDog("dogCanvas2b", "tailCanvas2b", "main");
   createDog("dogCanvas2c", "tailCanvas2c", "main");
@@ -376,6 +472,22 @@
       dodging = false;
     }, 340);
   }
+
+  function centerButtons() {
+    if (!safeZone || !yesBtn1 || !noBtn1) return;
+    const zoneW = safeZone.getBoundingClientRect().width;
+    const yesW = yesBtn1.getBoundingClientRect().width;
+    const noW = noBtn1.getBoundingClientRect().width;
+    const gap = 14;
+    const total = yesW + gap + noW;
+    const startX = Math.max(0, (zoneW - total) / 2);
+    yesBtn1.style.left = `${startX}px`;
+    noBtn1.style.left = `${startX + yesW + gap}px`;
+  }
+  centerButtons();
+  window.addEventListener("resize", () => {
+    if (attempts === 0) centerButtons();
+  });
 
   if (noBtn1 && safeZone) {
     noBtn1.addEventListener("click", (e) => {
