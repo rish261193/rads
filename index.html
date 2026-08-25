@@ -4,301 +4,384 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
 <title>Radhika... Will You Go On A Date With Me?</title>
-<meta name="description" content="A cute pixel-art date invitation for Radhika." />
+<meta name="description" content="A cute date invitation for Radhika." />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><text y=%2226%22 font-size=%2226%22>💗</text></svg>" />
 <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-<div class="game" id="game">
+<div id="radhika-date-v1" class="w-full">
 
-  <!-- ============ STAGE 1 : THE ASK ============ -->
-  <section class="stage stage-1-hero" id="stage-1" data-stage="1">
-    <div class="scene" aria-hidden="true">
-      <div class="scene-sky"></div>
-      <div class="scene-city"></div>
-      <div class="scene-hills"></div>
-      <div class="scene-cloud cloud-a"></div>
-      <div class="scene-cloud cloud-b"></div>
-      <div class="scene-cloud cloud-c"></div>
-      <div class="scene-cloud cloud-d"></div>
-      <div class="scene-cloud cloud-e"></div>
-      <div class="scene-tree tree-left"></div>
-      <div class="scene-tree tree-right"></div>
+  <div class="game" aria-live="polite">
 
-      <div class="flower-bed" aria-hidden="true">
-        <span class="pixel-flower pf-pink">✿</span>
-        <span class="pixel-flower pf-yellow">❀</span>
-        <span class="pixel-flower pf-white">✿</span>
-        <span class="pixel-flower pf-pink pf-sm">❀</span>
-        <span class="pixel-flower pf-yellow pf-sm">✿</span>
-        <span class="pixel-flower pf-white pf-sm">❀</span>
-        <span class="pixel-flower pf-pink">✿</span>
-        <span class="pixel-flower pf-yellow pf-sm">❀</span>
-      </div>
-
-      <span class="sparkle s1">✦</span>
-      <span class="sparkle s2">✦</span>
-      <span class="sparkle s3">✦</span>
-      <span class="sparkle s4">✦</span>
-      <span class="sparkle s5">✦</span>
-      <span class="bg-heart h1">♥</span>
-      <span class="bg-heart h2">♥</span>
-      <span class="bg-heart h3">♥</span>
-      <span class="bg-heart h5">♥</span>
-      <span class="bg-heart h6">♥</span>
-      <span class="bg-heart h7">♥</span>
+    <div class="sky" aria-hidden="true">
+      <div class="cloud c1">☁️</div>
+      <div class="cloud c2">☁️</div>
+      <div class="spark s1">✦</div>
+      <div class="spark s2">♡</div>
+      <div class="spark s3">✧</div>
+      <div class="spark s4">♡</div>
     </div>
 
-    <div class="stage-badge">STAGE <span>1</span>/5</div>
+    <div class="heart-burst" aria-hidden="true"></div>
 
-    <div class="stage-inner">
-      <div class="hero-heading-block">
-        <h1 class="pixel-heading heading-lg">RADHIKA<span class="dots">...</span></h1>
-        <h2 class="pixel-heading heading-sub">WILL YOU GO ON A DATE WITH ME?</h2>
-        <p class="support-text hero-support-text">Choose wisely. There is definitely a correct answer.</p>
+    <!-- STAGE 1 -->
+
+    <section class="stage active" data-stage="1">
+
+      <div class="kicker">
+        RADHIKA...
       </div>
 
-      <div class="dog-zone" id="dogZone1">
-        <div class="speech-bubble" id="dogBubble">Hmm&hellip; what are you doing? <span class="bubble-emoji">🐾</span></div>
-        <div class="dog dog-hero" id="dog1">
-          <div class="dog-ground-shadow"></div>
-          <canvas class="dog-tail" id="tailCanvas1" width="10" height="12"></canvas>
-          <canvas class="dog-body" id="dogCanvas1" width="16" height="19"></canvas>
+      <h2>
+        Will you go on a date with me?
+      </h2>
+
+      <p class="sub">
+        Choose wisely. There is definitely a correct answer.
+      </p>
+
+      <div class="dog-zone">
+        <div
+          class="dog"
+          id="dog1"
+          aria-label="Cute puppy mascot"
+        >
+          🐶
         </div>
       </div>
 
-      <div class="button-safe-zone" id="safeZone">
-        <button type="button" class="btn btn-yes" id="yesBtn1">YES <span class="heart-glyph">♥</span></button>
-        <button type="button" class="btn btn-no" id="noBtn1">NO</button>
+      <div class="card arena" id="arena">
+
+        <div class="choice-row" id="choiceRow">
+
+          <button
+            type="button"
+            class="btn yes"
+            id="yesBtn"
+          >
+            YES ♥
+          </button>
+
+          <button
+            type="button"
+            class="btn no"
+            id="noBtn"
+          >
+            NO
+          </button>
+
+        </div>
+
+        <div
+          class="msg"
+          id="attemptMsg"
+        ></div>
+
       </div>
 
-      <p class="hint-text" id="hintText">🐾 Psst&hellip; the smaller button is a little nervous.</p>
-      <p class="attempt-message" id="attemptMessage" aria-live="polite"></p>
-    </div>
-  </section>
+    </section>
 
-  <!-- ============ STAGE 2 : YAY ============ -->
-  <section class="stage" id="stage-2" data-stage="2" hidden>
-    <div class="scene" aria-hidden="true">
-      <div class="scene-sky"></div>
-      <div class="scene-city"></div>
-      <div class="scene-hills"></div>
-      <div class="scene-cloud cloud-a"></div>
-      <div class="scene-cloud cloud-b"></div>
-      <div class="scene-tree tree-left"></div>
-      <div class="scene-tree tree-right"></div>
-      <span class="sparkle s1">✦</span>
-      <span class="sparkle s2">✦</span>
-      <span class="bg-heart h1">♥</span>
-      <span class="bg-heart h2">♥</span>
-      <span class="bg-heart h3">♥</span>
-      <span class="bg-heart h4">♥</span>
-    </div>
+    <!-- STAGE 2 -->
 
-    <div class="stage-badge">STAGE <span>2</span>/5</div>
+    <section class="stage" data-stage="2">
 
-    <div class="stage-inner">
-      <div class="card yay-card">
-        <h1 class="pixel-heading heading-lg yay-heading">YAY! <span class="heart-glyph">♥</span></h1>
-        <p class="support-text">I&rsquo;m so glad you said yes.</p>
-        <p class="support-text-sm">See? Giving in wasn&rsquo;t that hard.</p>
+      <div class="couple">
+        🐶 💞 🐶
       </div>
 
-      <div class="couple-zone" id="coupleZone">
-        <div class="dog dog-couple-a" id="dog2a">
-          <canvas class="dog-tail" id="tailCanvas2a" width="10" height="12"></canvas>
-          <canvas class="dog-body" id="dogCanvas2a" width="16" height="19"></canvas>
-        </div>
-        <div class="dog dog-couple-b" id="dog2b">
-          <canvas class="dog-tail" id="tailCanvas2b" width="10" height="12"></canvas>
-          <canvas class="dog-body" id="dogCanvas2b" width="16" height="19"></canvas>
-        </div>
-        <div class="dog dog-runner" id="dog2c">
-          <canvas class="dog-tail" id="tailCanvas2c" width="10" height="12"></canvas>
-          <canvas class="dog-body" id="dogCanvas2c" width="16" height="19"></canvas>
-        </div>
-      </div>
+      <h2>
+        YAY! ♥
+      </h2>
 
-      <button type="button" class="btn btn-continue" id="toStage3Btn">PRESS TO CONTINUE →</button>
-    </div>
-  </section>
+      <p class="sub">
+        I’m so glad you said yes.
+      </p>
 
-  <!-- ============ STAGE 3 : PICK A DATE ============ -->
-  <section class="stage" id="stage-3" data-stage="3" hidden>
-    <div class="scene" aria-hidden="true">
-      <div class="scene-sky"></div>
-      <div class="scene-city"></div>
-      <div class="scene-hills"></div>
-      <div class="scene-cloud cloud-a"></div>
-      <div class="scene-tree tree-left"></div>
-      <span class="sparkle s1">✦</span>
-      <span class="sparkle s2">✦</span>
-      <span class="bg-heart h1">♥</span>
-    </div>
-
-    <div class="stage-badge">STAGE <span>3</span>/5</div>
-
-    <div class="stage-inner">
       <div class="card">
-        <h1 class="pixel-heading heading-md">♥ PICK A DATE ♥</h1>
-        <p class="support-text">Choose a day when you&rsquo;re free for me.</p>
+
+        <p style="text-align:center;font-weight:800;margin:4px 0 0">
+          See? Giving in wasn’t that hard.
+        </p>
+
+        <button
+          type="button"
+          class="btn primary"
+          data-next="3"
+        >
+          PRESS TO CONTINUE →
+        </button>
+
       </div>
 
-      <div class="calendar-row">
-        <div class="calendar" id="calendar">
-          <div class="calendar-header">
-            <button type="button" class="cal-nav" id="calPrev" aria-label="Previous month">&#8592;</button>
-            <span class="calendar-title" id="calTitle">Month Year</span>
-            <button type="button" class="cal-nav" id="calNext" aria-label="Next month">&#8594;</button>
-          </div>
-          <div class="calendar-weekdays">
-            <span>SUN</span><span>MON</span><span>TUE</span><span>WED</span><span>THU</span><span>FRI</span><span>SAT</span>
-          </div>
-          <div class="calendar-grid" id="calendarGrid"></div>
-        </div>
-
-        <div class="dog-zone dog-zone-cal" id="dogZone3">
-          <div class="speech-bubble" id="dogBubble3">I&rsquo;ll make this day amazing! 💕</div>
-          <div class="dog" id="dog3">
-            <canvas class="dog-tail" id="tailCanvas3" width="10" height="12"></canvas>
-            <canvas class="dog-body" id="dogCanvas3" width="16" height="19"></canvas>
-          </div>
+      <div class="dog-zone">
+        <div class="dog">
+          🐶
         </div>
       </div>
 
-      <button type="button" class="btn btn-continue" id="toStage4Btn" disabled>CONTINUE →</button>
-    </div>
-  </section>
+    </section>
 
-  <!-- ============ STAGE 4 : ACTIVITY ============ -->
-  <section class="stage" id="stage-4" data-stage="4" hidden>
-    <div class="scene" aria-hidden="true">
-      <div class="scene-sky"></div>
-      <div class="scene-city"></div>
-      <div class="scene-hills"></div>
-      <div class="scene-cloud cloud-a"></div>
-      <span class="sparkle s1">✦</span>
-      <span class="bg-heart h1">♥</span>
-    </div>
+    <!-- STAGE 3 -->
 
-    <div class="stage-badge">STAGE <span>4</span>/5</div>
+    <section class="stage" data-stage="3">
 
-    <div class="stage-inner">
+      <div class="kicker">
+        PICK A DATE
+      </div>
+
+      <h2>
+        When are you free for me?
+      </h2>
+
+      <p class="sub">
+        Pick a day. I promise not to turn it into a marriage interview.
+      </p>
+
+      <div class="dog-zone">
+        <div class="dog">
+          🐶
+        </div>
+      </div>
+
       <div class="card">
-        <h1 class="pixel-heading heading-md">♥ WHAT WOULD YOU LIKE TO DO? ♥</h1>
+
+        <label
+          for="datePick"
+          style="font-weight:900"
+        >
+          DATE
+        </label>
+
+        <input
+          id="datePick"
+          type="date"
+        />
+
+        <div
+          class="msg"
+          id="dateSpark"
+        ></div>
+
+        <button
+          type="button"
+          class="btn primary"
+          id="dateContinue"
+          disabled
+        >
+          CONTINUE →
+        </button>
+
       </div>
 
-      <div class="activity-row">
-        <div class="activity-grid" id="activityGrid">
-          <button type="button" class="activity-card" data-activity="Dinner Date">
-            <span class="activity-icon" aria-hidden="true">🍽️</span>
-            <span class="activity-label">DINNER DATE</span>
+    </section>
+
+    <!-- STAGE 4 -->
+
+    <section class="stage" data-stage="4">
+
+      <div class="kicker">
+        CHOOSE THE PLAN
+      </div>
+
+      <h2>
+        What would you like to do?
+      </h2>
+
+      <p class="sub">
+        One selection. No committee meeting required.
+      </p>
+
+      <div class="card">
+
+        <div
+          class="activities"
+          id="activityGrid"
+        >
+
+          <button
+            type="button"
+            class="activity"
+            data-value="Dinner Date"
+          >
+            🍝<br>
+            DINNER DATE
           </button>
-          <button type="button" class="activity-card" data-activity="Drinks">
-            <span class="activity-icon" aria-hidden="true">🥂</span>
-            <span class="activity-label">DRINKS</span>
+
+          <button
+            type="button"
+            class="activity"
+            data-value="Drinks"
+          >
+            🥂<br>
+            DRINKS
           </button>
-          <button type="button" class="activity-card" data-activity="Coffee &amp; Walk">
-            <span class="activity-icon" aria-hidden="true">☕</span>
-            <span class="activity-label">COFFEE &amp; WALK</span>
+
+          <button
+            type="button"
+            class="activity"
+            data-value="Coffee & Walk"
+          >
+            ☕<br>
+            COFFEE & WALK
           </button>
-          <button type="button" class="activity-card" data-activity="Amusement Park">
-            <span class="activity-icon" aria-hidden="true">🎢</span>
-            <span class="activity-label">AMUSEMENT PARK</span>
+
+          <button
+            type="button"
+            class="activity"
+            data-value="Amusement Park"
+          >
+            🎢<br>
+            AMUSEMENT PARK
           </button>
-          <button type="button" class="activity-card" data-activity="Movie Night">
-            <span class="activity-icon" aria-hidden="true">🍿</span>
-            <span class="activity-label">MOVIE NIGHT</span>
+
+          <button
+            type="button"
+            class="activity"
+            data-value="Movie Night"
+          >
+            🎬<br>
+            MOVIE NIGHT
           </button>
-          <button type="button" class="activity-card" data-activity="Surprise Me">
-            <span class="activity-icon" aria-hidden="true">🎁</span>
-            <span class="activity-label">SURPRISE ME</span>
+
+          <button
+            type="button"
+            class="activity"
+            data-value="Surprise Me"
+          >
+            👀<br>
+            SURPRISE ME
           </button>
+
         </div>
 
-        <div class="dog-zone dog-zone-activity" id="dogZone4">
-          <div class="speech-bubble" id="dogBubble4">Great choice! So many memories waiting! 🎢</div>
-          <div class="dog" id="dog4">
-            <canvas class="dog-tail" id="tailCanvas4" width="10" height="12"></canvas>
-            <canvas class="dog-body" id="dogCanvas4" width="16" height="19"></canvas>
+        <button
+          type="button"
+          class="btn primary"
+          id="lockBtn"
+          disabled
+        >
+          LOCK IT IN 🔒
+        </button>
+
+      </div>
+
+      <div class="dog-zone">
+        <div class="dog">
+          🐶
+        </div>
+      </div>
+
+    </section>
+
+    <!-- STAGE 5 -->
+
+    <section class="stage" data-stage="5">
+
+      <div class="couple">
+        🐶 ❤️ 🐶
+      </div>
+
+      <h2>
+        It’s a date! ♥
+      </h2>
+
+      <p class="sub">
+        No backing out now, princess.
+      </p>
+
+      <div class="card">
+
+        <div class="summary">
+
+          <div>
+            DATE:
+            <span id="confirmDate">
+              —
+            </span>
           </div>
+
+          <div>
+            ACTIVITY:
+            <span id="confirmActivity">
+              —
+            </span>
+          </div>
+
+        </div>
+
+        <p style="text-align:center;font-weight:900;margin:16px 0 2px">
+          Rishabh has been notified.
+        </p>
+
+        <button
+          type="button"
+          class="btn newmsg"
+          id="openNote"
+        >
+          1 NEW MESSAGE
+        </button>
+
+      </div>
+
+      <div class="dog-zone">
+        <div class="dog jump">
+          🐶
         </div>
       </div>
 
-      <button type="button" class="btn btn-continue" id="toStage5Btn" disabled>LOCK IT IN 🔒</button>
-    </div>
-  </section>
+    </section>
 
-  <!-- ============ STAGE 5 : CONFIRMATION ============ -->
-  <section class="stage" id="stage-5" data-stage="5" hidden>
-    <div class="scene" aria-hidden="true">
-      <div class="scene-sky"></div>
-      <div class="scene-city"></div>
-      <div class="scene-hills"></div>
-      <div class="scene-cloud cloud-a"></div>
-      <div class="scene-cloud cloud-b"></div>
-      <div class="scene-tree tree-left"></div>
-      <span class="sparkle s1">✦</span>
-      <span class="sparkle s2">✦</span>
-      <span class="bg-heart h1">♥</span>
-      <span class="bg-heart h2">♥</span>
-    </div>
+    <!-- NOTE MODAL -->
 
-    <div class="confetti-layer" id="confettiLayer" aria-hidden="true"></div>
+    <div
+      class="modal"
+      id="noteModal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="noteTitle"
+    >
 
-    <div class="stage-badge">STAGE <span>5</span>/5</div>
+      <div class="backdrop"></div>
 
-    <div class="stage-inner">
-      <div class="couple-zone couple-zone-sm">
-        <div class="dog dog-couple-a" id="dog5a">
-          <canvas class="dog-tail" id="tailCanvas5a" width="10" height="12"></canvas>
-          <canvas class="dog-body" id="dogCanvas5a" width="16" height="19"></canvas>
+      <div class="note">
+
+        <div class="note-head">
+
+          <span id="noteTitle">
+            a_small_note.txt
+          </span>
+
+          <button
+            type="button"
+            class="close"
+            id="closeNote"
+            aria-label="Close message"
+          >
+            ×
+          </button>
+
         </div>
-        <div class="dog dog-couple-b" id="dog5b">
-          <canvas class="dog-tail" id="tailCanvas5b" width="10" height="12"></canvas>
-          <canvas class="dog-body" id="dogCanvas5b" width="16" height="19"></canvas>
-        </div>
+
+        <div class="note-body">I know I give you a hard time.
+
+But from the first day we met, being around you has felt ridiculously easy.
+
+I don’t have to pretend to be anyone else.
+
+So yeah… maybe you’re right.
+
+Maybe I’ll put my ego aside this once. ♥
+
+— Rishabh</div>
+
       </div>
 
-      <h1 class="pixel-heading heading-md final-heading">IT&rsquo;S A DATE! <span class="heart-glyph">♥</span></h1>
-
-      <div class="card confirm-card">
-        <p class="confirm-line confirm-date" id="confirmDate">DATE: <span></span></p>
-        <p class="confirm-line confirm-activity" id="confirmActivity">ACTIVITY: <span></span></p>
-        <hr class="confirm-divider" />
-        <p class="confirm-final" id="confirmFinal">No backing out now, princess. 😌</p>
-        <p class="confirm-notice" id="confirmNotice">🐾 Rishabh has been notified.</p>
-      </div>
-
-      <button type="button" class="new-message" id="newMessageBtn">
-        <span class="envelope">✉️<span class="badge">1</span></span>
-        <span class="new-message-text">1 NEW MESSAGE</span>
-      </button>
     </div>
-  </section>
 
-</div>
-
-<!-- ============ NOTE MODAL ============ -->
-<div class="modal-overlay" id="noteOverlay" hidden>
-  <div class="note-window" role="dialog" aria-modal="true" aria-labelledby="noteTitle">
-    <div class="note-titlebar">
-      <span id="noteTitle">a_small_note.txt</span>
-      <button type="button" class="note-close" id="noteClose" aria-label="Close note">×</button>
-    </div>
-    <div class="note-body">
-      <p>I know I give you a hard time.</p>
-      <p>But from the first day we met, being around you has felt ridiculously easy.</p>
-      <p>I don&rsquo;t have to pretend to be anyone else.</p>
-      <p>So yeah&hellip; maybe you&rsquo;re right.</p>
-      <p>Maybe I&rsquo;ll put my ego aside this once. <span class="heart-glyph">♥</span></p>
-      <p class="note-sign">&mdash; Rishabh</p>
-    </div>
   </div>
-</div>
 
-<div class="sr-only" aria-live="polite" id="srAnnouncer"></div>
+</div>
 
 <script src="script.js"></script>
 </body>
