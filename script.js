@@ -447,6 +447,51 @@
     }
   );
 
+  const sendVerdictBtn =
+    root.querySelector(
+      '#sendVerdictBtn'
+    );
+
+  const WHATSAPP_NUMBER =
+    '17052577070';
+
+  sendVerdictBtn.addEventListener(
+    'click',
+    () => {
+
+      const dateText =
+        root.querySelector(
+          '#confirmDate'
+        ).textContent.trim();
+
+      const activityText =
+        root.querySelector(
+          '#confirmActivity'
+        ).textContent.trim();
+
+      const verdictMessage =
+        'The Queen has decided 👑\n' +
+        '📅 ' + dateText + '\n' +
+        '🎢 ' + activityText + '\n' +
+        'It’s a date ♥️';
+
+      const whatsappUrl =
+        'https://wa.me/' +
+        WHATSAPP_NUMBER +
+        '?text=' +
+        encodeURIComponent(
+          verdictMessage
+        );
+
+      window.open(
+        whatsappUrl,
+        '_blank',
+        'noopener'
+      );
+
+    }
+  );
+
   const modal =
     root.querySelector(
       '#noteModal'
